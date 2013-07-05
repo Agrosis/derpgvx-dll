@@ -1,5 +1,6 @@
 #include <tchar.h>
 #include <fstream>
+#include <process.h>
 
 #include "globals.h"
 
@@ -15,24 +16,24 @@ GMEXPORT void vx_destroy() { // unused for now
 	WSACleanup();
 }
 
+void download(void *args) {
+	dlcallback.reset();
+	HRESULT hr = URLDownloadToFile ( NULL, _T(dladdress), _T(dlfile), 0, &dlcallback);
+}
+
 GMEXPORT double vx_download(char* address, char* file) {
-	/*ofstream output("game.jar", ios::out | ios::binary);
+	dladdress = address;
+	dlfile = file;
 
-	vxsocket* sock = new vxsocket("http://assets.jantox.com/deathsiege/game.jar", 80);
+	_beginthread(download, 0, (void*)0);
 	
-	char* buffer;
-	int recved;
-	memset(buffer, 0, BUFFER_SIZE);
-
-	while((recved = sock->receiveData(buffer)) > 0) {
-		output.write(buffer, recved);
-	}
-
-	output.close();
-
-	sock->disconnect();*/
-
-	HRESULT hr = URLDownloadToFile ( NULL, _T(address), _T(file), 0, NULL );
-
 	return 0;
+}
+
+GMEXPORT double vx_download_progress() {
+	return dlcallback.getProgress();
+}
+
+GMEXPORT double vx_download_total() {
+	return dlcallback.getTotal();
 }
