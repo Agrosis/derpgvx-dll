@@ -61,11 +61,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="crypto.cpp" />
     <ClCompile Include="derpgvx.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="vsocket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="crypto.h" />
     <ClInclude Include="dlcallback.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="vxsocket.h" />

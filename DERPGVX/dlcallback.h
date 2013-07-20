@@ -13,7 +13,8 @@ public:
 	}
 
 	void reset() {
-		this->current = this->total = 0;
+		this->current = 0;
+		this->total = 0;
 	}
 
 	ULONG getProgress() {
